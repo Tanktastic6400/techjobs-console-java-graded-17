@@ -1,3 +1,4 @@
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,7 +120,21 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        String template = """
+                *****
+                position type: {0}
+                name: {1}
+                employer: {2}
+                location: {3}
+                core competency: {4}
+                *****
+                """;
 
-        System.out.println("printJobs is not implemented yet");
+        for(HashMap<String,String> job : someJobs) {
+            String[] entries = job.values().toArray(new String[0]);
+
+            System.out.println(MessageFormat.format(template, entries[0], entries[1], entries[2], entries[3], entries[4]));
+        }
+//        System.out.println("printJobs is not implemented yet");
     }
 }
