@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -70,12 +67,13 @@ public class JobData {
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        String lowercaseValue = value.toLowerCase();
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = row.get(column).toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(lowercaseValue)) {
                 jobs.add(row);
             }
         }
@@ -95,7 +93,28 @@ public class JobData {
         loadData();
 
         // TODO - implement this method
-        return null;
+            ArrayList<HashMap<String,String>> jobs = new ArrayList<>();
+            String lowercaseValue = value.toLowerCase();
+            String[] mapKeys;
+
+            for(HashMap<String,String> job : allJobs){
+                mapKeys = job.keySet().toArray(new String[0]);
+
+
+                for (String mapKey : mapKeys) {
+                    String aValue = job.get(mapKey).toLowerCase();
+
+                    if (aValue.contains(lowercaseValue) && !jobs.contains(job)) {
+                        jobs.add(job);
+                    }
+                }
+
+                //need to emulate what the column and value function does but automatically
+                //iterate through each column and search for values.
+
+            }
+
+        return jobs;
     }
 
     /**
